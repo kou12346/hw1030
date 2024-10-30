@@ -1,23 +1,23 @@
 #include<iostream>
 using namespace std;
 int *change_size(int *&arr, int size, int new_size) {
-    int *new_arr = new int[new_size]; //·sªº°}¦C 
-    int *recycler = arr; //ÂÂªº°}¦C 
-    copy(arr, arr + size, new_arr); //ÂÂªº½Æ»s¨ì·sªº 
-    int num=size; //ÂÂ°}¦C¤j¤p
+    int *new_arr = new int[new_size]; //æ–°çš„é™£åˆ— 
+    int *recycler = arr; //èˆŠçš„é™£åˆ— 
+    copy(arr, arr + size, new_arr); //èˆŠçš„è¤‡è£½åˆ°æ–°çš„ 
+    int num=size; //èˆŠé™£åˆ—å¤§å°
  
     while(num<new_size){
-    	num+=2; //·íÂÂ°}¦C¤j¤p¤p©ó·s°}¦C¤j¤p¡A·s°}¦Cªø«×=ÂÂ°}¦Cªø«×+2 size+=2 
+    	num*=2; //ç•¶èˆŠé™£åˆ—å¤§å°å°æ–¼æ–°é™£åˆ—å¤§å°ï¼Œæ–°é™£åˆ—é•·åº¦=èˆŠé™£åˆ—é•·åº¦*2 size*=2 
 	}
 	
 	for(int i=size-1;i<num;i++){
-		new_arr[i]=i+1;   //§â·s°}¦C¤¤ªºªÅ°}¦C¶ë¤J¼Æ¦r 
+		new_arr[i]=i+1;   //æŠŠæ–°é™£åˆ—ä¸­çš„ç©ºé™£åˆ—å¡å…¥æ•¸å­— 
 	}
-    delete[] recycler; //§R°£ÂÂ°}¦C 
+    delete[] recycler; //åˆªé™¤èˆŠé™£åˆ— 
     arr = new_arr;  
     return arr;
 }
-void print_arr(int *arr,int size){   //¿é¥X°}¦C¨ç¦¡ 
+void print_arr(int *arr,int size){   //è¼¸å‡ºé™£åˆ—å‡½å¼ 
 	for(int i=0;i<size;i++){
 		cout<<arr[i]<<" ";
 	}
@@ -36,8 +36,8 @@ int main() {
 	
     int new_size;
     
-	cout<<"¿é¤J new_size"<<endl;
-	cin>>new_size;  //¿é¤J·s°}¦C¤j¤p 
+	cout<<"è¼¸å…¥ new_size"<<endl;
+	cin>>new_size;  //è¼¸å…¥æ–°é™£åˆ—å¤§å° 
     change_size(arr, size, new_size); // 
     print_arr(arr, new_size);  // Size has changed, print the new array.
 }
