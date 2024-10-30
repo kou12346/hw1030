@@ -2,20 +2,22 @@
 using namespace std;
 
 int *change_size(int *&arr, int &size, int new_size) {
-    int *new_arr = new int[new_size]; // 建立新陣列
-    int *recycler = arr; // 指向舊陣列以便後續刪除
+    while (size < new_size) {  // 每次大小加倍直到大於等於 new_size
+        int new_arr_size = size * 2;
+        int *new_arr = new int[new_arr_size];  // 建立兩倍大小的新陣列
 
-    // 將舊陣列的元素複製到新陣列
-    copy(arr, arr + size, new_arr);
+        // 將舊陣列的元素複製到新陣列
+        copy(arr, arr + size, new_arr);
 
-    // 將新位置的元素填入值
-    for (int i = size; i < new_size; i++) {
-        new_arr[i] = i + 1;  // 這裡可以依照需求填入其他數值
+        // 將新位置的元素填入值
+        for (int i = size; i < new_arr_size; i++) {
+            new_arr[i] = i + 1;  // 可填入其他需要的數值
+        }
+
+        delete[] arr;  // 釋放舊陣列的記憶體
+        arr = new_arr;  // 將新陣列指向 arr
+        size = new_arr_size;  // 更新 size 為新陣列的大小
     }
-
-    delete[] recycler; // 釋放舊陣列的記憶體
-    arr = new_arr;  // 將新陣列指向 arr
-    size = new_size;  // 更新 size 的值為 new_size
     return arr;
 }
 
@@ -41,8 +43,8 @@ int main() {
     cout << "輸入 new_size: ";
     cin >> new_size;  // 輸入新陣列大小
 
-    change_size(arr, size, new_size);  // 改變陣列大小
-    print_arr(arr, new_size);  // 輸出新的陣列
+    change_size(arr, size, new_size);  // 改變陣列大小，每次*2
+    print_arr(arr, size);  // 輸出新的陣列
 
     delete[] arr;  // 最後釋放記憶體
 }
